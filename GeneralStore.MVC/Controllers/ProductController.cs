@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GeneralStore.MVC.Models;
@@ -31,6 +32,30 @@ namespace GeneralStore.MVC.Controllers
                 return RedirectToAction("Index");
             }
             return View(product);
+        }
+        //GET: Product/Delete{id}
+        public ActionResult Delete(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Product product = _db.Products.Find(id);
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+        //POST: Product/Delete{id}
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            Product product = _db.Products.Find(id);
+            _db.Products.Remove(product);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
