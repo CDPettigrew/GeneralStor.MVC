@@ -9,7 +9,7 @@ namespace GeneralStore.MVC.Models
     public class Customer
     {
         [Key]
-        public int CusotmerId { get; set; }
+        public int CustomerId { get; set; }
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

@@ -17,7 +17,7 @@ namespace GeneralStore.MVC.Models
         public virtual Product Product { get; set; }
         [Required]
         public int CustomerId { get; set; }
-        [ForeignKey(nameof(Customer))]
+        [ForeignKey(nameof(CustomerId))]
         public virtual Customer Customer { get; set; }
         [Required]
         public int Quantity { get; set; }
