@@ -10,16 +10,16 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Adding a product</h2>
+        <h2>Products</h2>
         <p>
-            To start adding product click the button below.
+            To view our product click the button below.
         </p>
-        <p><a class="btn btn-default" @Html.ActionLink("Add a Product", "Index", "Product")</a></p>
+        <p><a class="btn btn-default" @Html.ActionLink("Products", "Index", "Product")</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more Information</h2>
+        <h2>About Us</h2>
         <p>Click the button below to get more information on the general store.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" @Html.ActionLink("Learn More About Us", "About")</a></p>
     </div>
     <div class="col-md-4">
         <h2>Contact</h2>
