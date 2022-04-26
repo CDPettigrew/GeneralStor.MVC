@@ -28,10 +28,13 @@ namespace GeneralStore.MVC.Models
             get
             {
                 if (Product == null)
+                {
                     return 0;
+                }
                 decimal totalCost = Quantity * Product.Price;//get cost price times amount purchase
-                decimal tax = Decimal.Multiply(totalCost, 0.07m);// add sales tax after discount
-                return Math.Round(totalCost + tax, 2);//Round to the nearest .00 place
+                return totalCost;
+                //decimal tax = Decimal.Multiply(totalCost, 0.07m);// add sales tax after discount
+                //return Math.Round(totalCost + tax);//Round to the nearest .00 place
             }
         }
     }
