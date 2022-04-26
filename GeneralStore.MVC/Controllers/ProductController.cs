@@ -20,5 +20,17 @@ namespace GeneralStore.MVC.Controllers
         {
             return View();
         }
+        //POST: Product/Create
+        [HttpPost]
+        public ActionResult Create(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Products.Add(product);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(product);
+        }
     }
 }
