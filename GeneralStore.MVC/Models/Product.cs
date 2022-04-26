@@ -23,8 +23,8 @@ namespace GeneralStore.MVC.Models
         [Display (Name = "It Is Food")]
         public bool IsFood { get; set; }
     }
-    public class ProductDbCOntext : DbContext 
+    /*public class ProductDbCOntext : DbContext 
     { 
         public DbSet<Product> Products { get; set; }
-    }
+    }*/
 }
