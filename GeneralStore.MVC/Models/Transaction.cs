@@ -14,7 +14,7 @@ namespace GeneralStore.MVC.Models
         [Required]
         public int ProductId { get; set; }
         [ForeignKey(nameof(ProductId))]
-        public virtual Product Product { get; set; }
+        public virtual Product Product { get; set; } //= new List<Product>();
         [Required]
         public int CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]

@@ -19,6 +19,8 @@ namespace GeneralStore.MVC.Controllers
         //GET: Transaction/Create
         public ActionResult Create()
         {
+            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "Name");
+            ViewBag.CustomerId = new SelectList(_db.Customers, "CustomerId", "FullName");
             return View();
         }
         //POST: Transaction/Create
@@ -30,23 +32,48 @@ namespace GeneralStore.MVC.Controllers
                 var product = _db.Products.FirstOrDefault(p => p.ProductId == transaction.ProductId);
                 if(product == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "product was null");
                 }
-                var customer = _db.Customers.FirstOrDefault(c => c.CustomerId == transaction.ProductId);
+                var customer = _db.Customers.FirstOrDefault(c => c.CustomerId == transaction.CustomerId);
                 if(customer == null)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "customer was null");
                 }
                 if(transaction.Quantity > product.Inventory)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "not enough inventory");
                 }
                 product.Inventory -= transaction.Quantity;
                 transaction.DateOfTransaction = DateTime.Now;
                 _db.Transactions.Add(transaction);
                 _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "Name");
+            ViewBag.CustomerId = new SelectList(_db.Customers, "CustomerId", "FullName");
+            return View(transaction);
+        }
+        //GET: Customer/Delete{id}
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = _db.Transactions.Find(id);
+            if (transaction == null)
+            {
+                return HttpNotFound();
             }
             return View(transaction);
+        }
+        //GET:Transaction/Delete
+        public ActionResult Delete(int id)
+        {
+            Transaction transaction = _db.Transactions.Find(id);
+            _db.Transactions.Remove(transaction);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
