@@ -109,5 +109,19 @@ namespace GeneralStore.MVC.Controllers
             ViewBag.CustomerId = new SelectList(_db.Customers, "CustomerId", "FullName");
             return View(transaction);
         }
+        //GET: Customer/Details{id}
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = _db.Transactions.Find(id);
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+            return View(transaction);
+        }
     }
 }
