@@ -15,7 +15,7 @@ namespace GeneralStore.MVC.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-            return View(_db.Transactions.ToList());
+            return View(_db.Transactions.OrderBy(t => t.DateOfTransaction).ToList());
         }
         //GET: Transaction/Create
         public ActionResult Create()
