@@ -61,12 +61,12 @@ namespace GeneralStore.MVC.Controllers
         //GET: Customer/Edit{id}
         public ActionResult Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Customer customer = _db.Customers.Find(id);
-            if(customer == null)
+            if (customer == null)
             {
                 return HttpNotFound();
             }
@@ -97,6 +97,13 @@ namespace GeneralStore.MVC.Controllers
             {
                 return HttpNotFound();
             }
+            CustomerDetail details = new CustomerDetail()
+            {
+                FullName = customer.FullName,
+                CustomerId = customer.CustomerId,
+                Transactions = customer.Transactions
+            };
+
             return View(customer);
         }
     }

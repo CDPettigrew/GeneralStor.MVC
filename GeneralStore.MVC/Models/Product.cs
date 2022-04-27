@@ -22,5 +22,6 @@ namespace GeneralStore.MVC.Models
         [Required]
         [Display (Name = "It Is Food")]
         public bool IsFood { get; set; }
+        public virtual List<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }
