@@ -68,7 +68,7 @@ namespace GeneralStore.MVC.Controllers
             }
             return View(transaction);
         }
-        //GET:Transaction/Delete
+        //POST:Transaction/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
