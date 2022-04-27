@@ -23,6 +23,7 @@ namespace GeneralStore.MVC.Models
         public int Quantity { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime DateOfTransaction { get; set; }
+        [Display(Name ="Total Cost")]
         public decimal Total
         {
             get

@@ -30,12 +30,12 @@ namespace GeneralStore.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var product = _db.Products.FirstOrDefault(p => p.ProductId == transaction.ProductId);
+                var product = _db.Products.Find(transaction.ProductId);
                 if (product == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "product was null");
                 }
-                var customer = _db.Customers.FirstOrDefault(c => c.CustomerId == transaction.CustomerId);
+                var customer = _db.Customers.Find(transaction.CustomerId);
                 if (customer == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "customer was null");
@@ -59,12 +59,12 @@ namespace GeneralStore.MVC.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "No Id entered");
             }
             Transaction transaction = _db.Transactions.Find(id);
             if (transaction == null)
             {
-                return HttpNotFound();
+                return HttpNotFound("No transaction With that id found");
             }
             return View(transaction);
         }
@@ -83,12 +83,12 @@ namespace GeneralStore.MVC.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest,"No id Given");
             }
             Transaction transaction = _db.Transactions.Find(id);
             if (transaction == null)
             {
-                return HttpNotFound();
+                return HttpNotFound("No transaction with current id found");
             }
             ViewBag.ProductId = new SelectList(_db.Products, "ProductId", "Name");
             ViewBag.CustomerId = new SelectList(_db.Customers, "CustomerId", "FullName");
@@ -119,7 +119,7 @@ namespace GeneralStore.MVC.Controllers
             Transaction transaction = _db.Transactions.Find(id);
             if (transaction == null)
             {
-                return HttpNotFound();
+                return HttpNotFound("No transaction with current id found");
             }
             return View(transaction);
         }
